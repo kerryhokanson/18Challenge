@@ -3,9 +3,19 @@ const userSchema = require('./User')
 
 const thoughtSchema = new Schema(
     {
-        thoughtText: {},
-        createdAt: {},
-        username: {},
+        thoughtText: {
+            type: String,
+            required: true,
+            max_length: 280,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now(),
+        },
+        username: {
+            type: String,
+            required: true,
+        },
         reactions: [reactionSchema],
 
     }
@@ -13,10 +23,28 @@ const thoughtSchema = new Schema(
 
 const reactionSchema = new Schema(
     {
-        reactionId: {},
-        reactionBody: {},
-        username: {},
-        createdAt: {},
+        reactionId: {
+            type: Schema.Types.ObjectId,
+            default: new ObjectId(thoughtSchema),
+        },
+        reactionBody: {
+            type: String,
+            required: true,
+            max_length: 280,
+        },
+        username: {
+            type: String,
+            required: true,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now(),
+            
+        },
 
     }
 )
+
+const Thought = model('thought', thoughtSchema)
+
+module.exports = Thought
