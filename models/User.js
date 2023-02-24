@@ -1,6 +1,6 @@
 const {Schema, model } = require('mongoose');
 const thoughtSchema = require('./Thought')
-import {isEmail} from 'validator'
+// import {isEmail} from 'validator'
 
 const userSchema = new Schema(
     {
@@ -16,7 +16,15 @@ const userSchema = new Schema(
             required: true,
             //this probably isn't the proper way to validate is email
             // validate: match("/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$/"),
+            // ah, think I got it
+            match: [/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$/]
         },
+        versionKey: false,
+        // __v: {
+        //     type: Number,
+        //     unique: true, // enforce uniqueness on __v field
+        //     autoIncrement: true,
+        //   },
         thoughts:[
             {
                 type: Schema.Types.ObjectId,
