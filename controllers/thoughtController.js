@@ -49,7 +49,6 @@ module.exports = {
         Thought.findOneAndUpdate(
             {_id: req.params.thoughtId},
             {$addToSet: {reactions: req.body}}
-
         )
         .then((thought) =>
             !thought
